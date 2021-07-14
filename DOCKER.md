@@ -16,9 +16,10 @@ care -- dev compose will overwrite prod compose and vice versa
 
 ##### development
 
--   dev compose cmd (from ./): $ docker-compose -f docker-compose.dev.yml up --build --remove-orphans
--   or to run last image: $ docker compose up (-d for detached mode)
--   to stop running: $ docker compose stop
+-   place contents of preprod.env file into .env
+-   dev compose cmd (from ./): $ `docker-compose -f docker-compose.dev.yml up --build --remove-orphans`
+-   or to run last image: $ `docker compose up -d` (`-d` for detached mode)
+-   to stop running: $ `docker compose stop`
 
 development server will give a port you to view, but that's the inner port... go to the one on the left of client 'ports' in the docker-compose file (specified in env)
 
@@ -64,7 +65,7 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
 
 creating images
 
-1. go to dockerhub and create repository:
+1. go to dockerhub and create repository (mine is ihomenasusdevr/nrd):
 2. `cd client && docker build . -t ihomenasusdevr/nrd:client-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:client-depl && cd ..`
 3. `cd server && docker build . -t ihomenasusdevr/nrd:server-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:server-depl && cd ..`
 
@@ -74,6 +75,14 @@ Digital Ocean instructions
 2. mount to active state: `docker-machine use machine-name`
 3. enter with: `docker-machine ssh machine-name`
 4. install docker-compose with `apt install docker-compose`
-5. docker pull client/server images
-6. touch docker-compose.yml --> vim --> copy/paste docker-compose.depl.yml
-7. touch .env --> vim --> copy/paste depl.env
+5. docker pull client/server images (`docker pull ihomenasusdevr/nrd:client-depl`, `docker pull ihomenasusdevr/nrd:server-depl`)
+6. `touch docker-compose.yml` --> `vim docker-compose.yml` --> copy/paste docker-compose.depl.yml
+7. `touch .env` --> `vim .env` --> copy/paste postprod.env contents to .env
+8. deploy app: `docker-compose up -d --force-recreate --remove-orphans`
+9. exit ssh shell: `exit`
+
+#### Useful commands
+
+-   stop nginx: `sudo systemctl stop nginx`
+-   check network stuff: `sudo netstat -nlp`
+-   to run app from Docker Desktop, paste any of the non-hosting docker-compose file contents into docker-compose.yml

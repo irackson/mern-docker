@@ -16,7 +16,7 @@ export const getLatLngFromInput = async (address) => {
 
     try {
         const response = await fetch(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_MAPS_API}`
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCs2w3NbMNabcRItNRKIaD-R0D4-rHJ0Po`
         );
         const data = await response.json();
         coor.lat = data.results[0].geometry.location.lat;

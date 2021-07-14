@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 
 import "./Login.css";
 
-const API_URL =
-    process.env.NODE_ENV === "production"
-        ? `http://${process.env.REACT_APP_PROD_API_DOMAIN}:${process.env.REACT_APP_DEV_API_PORT}`
-        : `http://${process.env.REACT_APP_DEV_API_DOMAIN}:${process.env.REACT_APP_DEV_API_PORT}`;
+const API_URL = window.document.URL.includes("localhost")
+    ? `http://localhost:4000`
+    : "http://159.89.34.53:4000";
 
 // const API_PORT = process.env.REACT_APP_DEV_API_PORT
 //     ? process.env.REACT_APP_DEV_API_PORT
