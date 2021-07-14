@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+    ##########################
+    ### SETUP SERVER CONTAINER
+    ##########################
+    server:
+        container_name: server-dev
+        # Tell docker what file to build the server from
+        build:
+            context: ./server
+            dockerfile: Dockerfile.dev
+        environment:
+            - PORT=${PORT}
+            - MONGODB_URL=${MONGODB_DEV_URL}
+            - SECRET=${SECRET}
+            - NODE_ENV=development
+        ports:
+            - ${PORT}:${PORT}
+        volumes:
+            # Map client src to server src to hot reload
+            - ./server:/app/server
+        # Nodemon for hot reloading (-L flag required for polling in Docker)
+        command: nodemon -L server.js
+        depends_on:
+            - db
+        restart: always
+    ##########################
+    ### SETUP CLIENT CONTAINER
+    ##########################
+    client:
+        container_name: client-dev
+        build:
+            context: ./client
+            dockerfile: Dockerfile.dev
+        environment:
+            - REACT_APP_MAPS_API=${REACT_APP_MAPS_API}
+            - REACT_APP_DEV_API_PORT=${REACT_APP_DEV_API_PORT}
+            - REACT_APP_PORT=${REACT_APP_PORT}
+            - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING_DEV}
+        expose:
+            - ${REACT_APP_PORT}
+        ports:
+            - ${REACT_APP_PORT}:${REACT_APP_PORT_CONTAINER}
+        volumes:
+            - ./client/src:/app/client/src
+            - ./client/public:/app/client/public
+        links:
+            - server
+        command: npm run start
+        restart: always
+    ##########################
+    ### SETUP DB CONTAINER
+    ##########################
+    db:
+        container_name: db-dev
+        image: mongo
+        ports:
+            - ${MONGO_PORT}:${MONGO_PORT}
+        restart: always

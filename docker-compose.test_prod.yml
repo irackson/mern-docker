@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+    ##########################
+    ### SETUP SERVER CONTAINER
+    ##########################
+    server:
+        container_name: server-prod
+        # Tell docker what file to build the server from
+        build:
+            context: ./server
+            dockerfile: Dockerfile.prod
+        environment:
+            - PORT=${PORT}
+            # - MONGODB_URL=${MONGODB_PROD_URL}
+            - MONGODB_URL=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGODB_PROD_URI}
+            - SECRET=${SECRET}
+            - NODE_ENV=production
+        ports:
+            - ${PORT}:${PORT}
+        command: node server.js
+        # should be links instead of depends_on?
+        depends_on:
+            - db
+        restart: always
+    ##########################
+    ### SETUP CLIENT CONTAINER
+    ##########################
+    client:
+        container_name: client-prod
+        build:
+            context: ./client
+            dockerfile: Dockerfile.prod
+        environment:
+            - REACT_APP_MAPS_API=${REACT_APP_MAPS_API}
+            - NODE_ENV=production
+        ports:
+            - 80:80
+        links:
+            - server
+        restart: always
+    ##########################
+    ### SETUP DB CONTAINER
+    ##########################
+    db:
+        # container_name: db-prod
+        image: mongo
+        ports:
+            - ${MONGO_PORT}:${MONGO_PORT}
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+        volumes:
+            # Map physical volume to virtual for data persistence
+            # On server could be /data/db
+            # For this case we will create a Docker volume and use it instead
+            # You need to run docker volume create yourproject-dbdata
+            - rhw-dbdata:/data/db
+            - ./docker-scripts/:/docker-entrypoint-initdb.d
+        command: [--auth]
+# Add this to include data volume for mongo
+# Confirm this is working later
+volumes:
+    ? rhw-dbdata

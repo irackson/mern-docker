@@ -1,0 +1,7 @@
+.git
+node_modules
+npm-debug
+build
+.dockerignore
+Dockerfile
+Dockerfile.prod
