@@ -33,11 +33,11 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
     -   $ docker volume remove _existing-db_
 
 1. place contents of preprod.env file into .env
-2. run `docker-compose -f docker-compose.pre_prod.yml up --build`
+2. run `docker-compose -f docker-compose.pre_prod.yml up --build --remove-orphans`
 3. in terminal...
 
     1. list containers with `docker ps`, then copy name of container with mongo image (should be `node-react-docker_db_1`)
-    2. enter mongo container with `docker exec -it node-react-docker_db_1 bash`
+    2. enter mongo container with `docker exec -it team-nrd_db_1 bash`
     3. enter mongo shell with `mongo`
     4. switch to db admin with `use admin`
     5. create root user with
@@ -57,17 +57,23 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
 6. shut down docker containers with `ctrl c`
 
 7. place contents of postprod.env file into .env
-8. create production images with `docker-compose -f docker-compose.test_prod.yml up --build`
+ <!-- 8. create production images with `docker-compose -f docker-compose.test_prod.yml up --build --remove-orphans` -->
+8. create production images with `docker-compose -f docker-compose.test_prod.yml up --build --remove-orphans`
 
 ###### upload production images to dockerhub
 
-go to dockerhub and create repository:
-docker tag local-image:tagname nrd:tagname
-docker push nrd:tagname
+creating images
 
-### Digital Ocean instructions
+1. go to dockerhub and create repository:
+2. `cd client && docker build . -t ihomenasusdevr/nrd:client-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:client-depl && cd ..`
+3. `cd server && docker build . -t ihomenasusdevr/nrd:server-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:server-depl && cd ..`
+
+Digital Ocean instructions
 
 1. `docker-machine create --driver digitalocean --digitalocean-image "ubuntu-18-04-x64" --digitalocean-access-token yourtoken yourdropletname`
-2. `docker-machine use yourdropletname`
-
-3.
+2. mount to active state: `docker-machine use machine-name`
+3. enter with: `docker-machine ssh machine-name`
+4. install docker-compose with `apt install docker-compose`
+5. docker pull client/server images
+6. touch docker-compose.yml --> vim --> copy/paste docker-compose.depl.yml
+7. touch .env --> vim --> copy/paste depl.env

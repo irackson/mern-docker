@@ -33,6 +33,8 @@ services:
             dockerfile: Dockerfile.prod
         environment:
             - REACT_APP_MAPS_API=${REACT_APP_MAPS_API}
+            - REACT_APP_DEV_API_PORT=${REACT_APP_DEV_API_PORT}
+            - REACT_APP_PROD_API_DOMAIN=${REACT_APP_PROD_API_DOMAIN}
             - NODE_ENV=production
         ports:
             - 80:80

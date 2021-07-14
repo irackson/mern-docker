@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 import "./Login.css";
 
-const API_PORT = process.env.REACT_APP_DEV_API_PORT
-    ? process.env.REACT_APP_DEV_API_PORT
-    : "3000";
-
 const API_URL =
     process.env.NODE_ENV === "production"
-        ? "http://localhost:4000"
-        : `http://localhost:${API_PORT}`;
+        ? `http://${process.env.REACT_APP_PROD_API_DOMAIN}:${process.env.REACT_APP_DEV_API_PORT}`
+        : `http://${process.env.REACT_APP_DEV_API_DOMAIN}:${process.env.REACT_APP_DEV_API_PORT}`;
+
+// const API_PORT = process.env.REACT_APP_DEV_API_PORT
+//     ? process.env.REACT_APP_DEV_API_PORT
+//     : "3000";
 // const API_URL =
 //     process.env.NODE_ENV === "production"
 //         ? "https://seir-team-project.herokuapp.com"
