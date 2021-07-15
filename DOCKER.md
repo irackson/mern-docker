@@ -72,6 +72,7 @@ creating images
 Digital Ocean instructions
 
 1. `docker-machine create --driver digitalocean --digitalocean-image "ubuntu-18-04-x64" --digitalocean-access-token yourtoken yourdropletname`
+ <!-- - if the following error shows up: Error creating machine: Error running provisioning: Unable to verify the Docker daemon is listening: Maximum number of retries (10) exceeded, try  -->
 2. mount to active state: `docker-machine use machine-name`
 3. enter with: `docker-machine ssh machine-name`
 4. install docker-compose with `apt install docker-compose`

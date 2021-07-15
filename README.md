@@ -19,6 +19,6 @@ Your project will use Jenkins to set up a build pipeline. The build stage should
 
     Finally, your pipeline should have a delivery stage that includes pushing code to a Git repository and/or deploying the application with tools such as Heroku.
 
-LiveLink (frontend): <http://159.89.34.53/>
-LiveLink (backend): <http://159.89.34.53:4000/>
+LiveLink (frontend): <http://165.227.176.67/>
+LiveLink (backend): <http://165.227.176.67:4000/>
 Git Repo Link (frontend & backend):

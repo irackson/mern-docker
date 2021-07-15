@@ -1,0 +1,170 @@
+ homedeveloper  ... | SEIR Projects | Capstone | team-nrd  ? dbscript ? 6  docker-machine ssh do2-seir 
+Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 4.15.0-144-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Thu Jul 15 03:32:44 UTC 2021
+
+  System load:  0.6                Users logged in:        0
+  Usage of /:   12.3% of 24.06GB   IP address for eth0:    165.227.176.67
+  Memory usage: 27%                IP address for eth1:    10.108.0.3
+  Swap usage:   0%                 IP address for docker0: 172.17.0.1
+  Processes:    86
+
+30 updates can be applied immediately.
+13 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+New release '20.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Thu Jul 15 03:21:00 2021 from 66.65.97.188
+root@do2-seir:~# docker pull ihomenasusdevr/nrd2:client-depl
+client-depl: Pulling from ihomenasusdevr/nrd2
+Digest: sha256:a0bad05b11765d461dbc9153573d8afdd2cc99b5cf97dbb77d46ab64dcb0407d
+Status: Image is up to date for ihomenasusdevr/nrd2:client-depl
+docker.io/ihomenasusdevr/nrd2:client-depl
+root@do2-seir:~# docker pull ihomenasusdevr/nrd2:server-depl
+server-depl: Pulling from ihomenasusdevr/nrd2
+Digest: sha256:f7caab9b3ee1bce9eeb2fa9969b78288df4e833b0521dfd47e6966c17ba4dae3
+Status: Image is up to date for ihomenasusdevr/nrd2:server-depl
+docker.io/ihomenasusdevr/nrd2:server-depl
+root@do2-seir:~# ls
+root@do2-seir:~# ls -a
+.  ..  .bash_history  .bashrc  .cache  .cloud-locale-test.skip  .gnupg  .profile  .ssh
+root@do2-seir:~# docker image ls
+REPOSITORY            TAG             IMAGE ID       CREATED              SIZE
+ihomenasusdevr/nrd2   server-depl     bfce8fffed8b   About a minute ago   204MB
+<none>                <none>          e53eff1080ec   About a minute ago   466MB
+ihomenasusdevr/nrd2   client-depl     50a211c105ce   2 minutes ago        24.9MB
+<none>                <none>          dc4611466ed4   3 minutes ago        572MB
+nginx                 stable-alpine   e1ccef1fb908   7 weeks ago          22.6MB
+node                  15.8.0-alpine   7d9686b9f483   5 months ago         110MB
+root@do2-seir:~# touch docker-compose.yml .env
+root@do2-seir:~# mkdir docker-scripts
+root@do2-seir:~# cd docker-scripts/
+root@do2-seir:~/docker-scripts# touch authscript.sh
+root@do2-seir:~/docker-scripts# vim authscript.sh 
+root@do2-seir:~/docker-scripts# vim authscript.sh 
+root@do2-seir:~/docker-scripts# cd ..
+root@do2-seir:~# ls -a
+.  ..  .bash_history  .bashrc  .cache  .cloud-locale-test.skip  .env  .gnupg  .profile  .ssh  .viminfo  docker-compose.yml  docker-scripts
+root@do2-seir:~# vim docker-compose.yml 
+root@do2-seir:~# vim .env
+root@do2-seir:~# docker-compose up
+Creating network "root_default" with the default driver
+Creating volume "root_rhw2-dbdata" with default driver
+Pulling db (mongo:latest)...
+latest: Pulling from library/mongo
+a31c7b29f4ad: Pull complete
+8490627ad476: Pull complete
+97d640de21f3: Pull complete
+4676d8bbe06c: Pull complete
+c33fdc30cbb0: Pull complete
+53109f095cee: Pull complete
+de3df330e925: Pull complete
+43cbf2472323: Pull complete
+d196d4cd5bac: Pull complete
+abc46d2c7828: Pull complete
+Digest: sha256:f4ff7bb4291eb5d3f530a726fc524ba8e4318d652e64f2d58560ff87d083a84c
+Status: Downloaded newer image for mongo:latest
+Creating root_db_1 ... 
+Creating root_db_1 ... done
+Creating root_server_1 ... 
+Creating root_server_1 ... done
+Creating root_client_1 ... 
+Creating root_client_1 ... done
+Attaching to root_db_1, root_server_1, root_client_1
+db_1      | about to fork child process, waiting until server is ready for connections.
+db_1      | forked process: 27
+db_1      | 
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.139+00:00"},"s":"I",  "c":"CONTROL",  "id":20698,   "ctx":"-","msg":"***** SERVER RESTARTED *****"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.154+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.162+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"main","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":13},"outgoing":{"minWireVersion":0,"maxWireVersion":13},"isInternalClient":true}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.166+00:00"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.167+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.174+00:00"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.176+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","ns":"config.tenantMigrationDonors"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.176+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","ns":"config.tenantMigrationRecipients"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.177+00:00"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":27,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"89079b036c44"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.177+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"5.0.0","gitVersion":"1184f004a99660de6f5e745573419bda8a28c0e9","openSSLVersion":"OpenSSL 1.1.1f  31 Mar 2020","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2004","distarch":"x86_64","target_arch":"x86_64"}}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.177+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"20.04"}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.177+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"127.0.0.1","port":27017,"tls":{"mode":"disabled"}},"processManagement":{"fork":true,"pidFilePath":"/tmp/docker-entrypoint-temp-mongod.pid"},"systemLog":{"destination":"file","logAppend":true,"path":"/proc/1/fd/1"}}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.179+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+db_1      | {"t":{"$date":"2021-07-15T03:40:04.179+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=256M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),builtin_extension_config=(zstd=(compression_level=6)),file_manager=(close_idle_time=600,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress,compact_progress],"}}
+client_1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+client_1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+client_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+client_1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+client_1  | 10-listen-on-ipv6-by-default.sh: info: /etc/nginx/conf.d/default.conf differs from the packaged version
+client_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+client_1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+client_1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: using the "epoll" event method
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: nginx/1.20.1
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: built by gcc 10.2.1 20201203 (Alpine 10.2.1_pre1) 
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: OS: Linux 4.15.0-144-generic
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: start worker processes
+client_1  | 2021/07/15 03:40:06 [notice] 1#1: start worker process 31
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.910+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1626320406:910951][27:0x7fdb32c67c80], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global recovery timestamp: (0, 0)"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.911+00:00"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1626320406:911589][27:0x7fdb32c67c80], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global oldest timestamp: (0, 0)"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.918+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":2739}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.919+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.939+00:00"},"s":"I",  "c":"STORAGE",  "id":4366408, "ctx":"initandlisten","msg":"No table logging settings modifications are required for existing WiredTiger tables","attr":{"loggingEnabled":true}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.940+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.945+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.957+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"3c406a14-167c-43ef-aa2e-5fe2330a56ef"}},"options":{"uuid":{"$uuid":"3c406a14-167c-43ef-aa2e-5fe2330a56ef"}}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.971+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.version","index":"_id_","commitTimestamp":null}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.974+00:00"},"s":"I",  "c":"REPL",     "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"5.0"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.975+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":13},"outgoing":{"minWireVersion":0,"maxWireVersion":13},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":13,"maxWireVersion":13},"outgoing":{"minWireVersion":13,"maxWireVersion":13},"isInternalClient":true}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.978+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":13,"maxWireVersion":13},"outgoing":{"minWireVersion":13,"maxWireVersion":13},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":13},"incomingInternalClient":{"minWireVersion":13,"maxWireVersion":13},"outgoing":{"minWireVersion":13,"maxWireVersion":13},"isInternalClient":true}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.978+00:00"},"s":"I",  "c":"STORAGE",  "id":5071100, "ctx":"initandlisten","msg":"Clearing temp directory"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.979+00:00"},"s":"I",  "c":"CONTROL",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.983+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.984+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"2b7c5850-5bb5-4d19-9105-24af6688d1b0"}},"options":{"capped":true,"size":10485760}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:06.995+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"local.startup_log","index":"_id_","commitTimestamp":null}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.015+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.017+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"127.0.0.1"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.019+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
+db_1      | child process started successfully, parent exiting
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.051+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"401c9c8f-3401-4efe-acc4-66d5cbc900ce"}},"options":{}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.052+00:00"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.087+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"_id_","commitTimestamp":null}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.088+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"lsidTTLIndex","commitTimestamp":null}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.462+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:40712","uuid":"d08c10a5-d518-4ac3-bcc1-05067a2c282a","connectionId":1,"connectionCount":1}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.465+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"127.0.0.1:40712","client":"conn1","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"5.0.0"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.485+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn1","msg":"Connection ended","attr":{"remote":"127.0.0.1:40712","uuid":"d08c10a5-d518-4ac3-bcc1-05067a2c282a","connectionId":1,"connectionCount":0}}
+server_1  | ALL THE WAY!
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.979+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:40716","uuid":"8629e953-e2c6-4a92-8258-1c48081ef98c","connectionId":2,"connectionCount":1}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:07.980+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"127.0.0.1:40716","client":"conn2","doc":{"application":{"name":"MongoDB Shell"},"driver":{"name":"MongoDB Internal Client","version":"5.0.0"},"os":{"type":"Linux","name":"Ubuntu","architecture":"x86_64","version":"20.04"}}}}
+db_1      | ================
+db_1      | Warning: the "mongo" shell has been superseded by "mongosh",
+db_1      | which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+db_1      | an upcoming release.
+db_1      | We recommend you begin using "mongosh".
+db_1      | For installation instructions, see
+db_1      | https://docs.mongodb.com/mongodb-shell/install/
+db_1      | ================
+db_1      | {"t":{"$date":"2021-07-15T03:40:08.064+00:00"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn2","msg":"createCollection","attr":{"namespace":"admin.system.users","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"de498599-ddff-4263-b68b-6766ec6b5530"}},"options":{}}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:08.083+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn2","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.users","index":"_id_","commitTimestamp":null}}
+db_1      | {"t":{"$date":"2021-07-15T03:40:08.084+00:00"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn2","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.users","index":"user_1_db_1","commitTimestamp":null}}
+db_1      | Successfully added user: {
+db_1      |     "user" : "rootname",
+db_1      |     "roles" : [
+db_1      |             {
+db_1      |                     "role" : "root",
+db_1      |                     "db" : "admin"
+db_1      |             }
+db_1      |     ]
+db_1      | }
+db_1      | Error saving history file: FileOpenFailed Unable to open() file /home/mongodb/.dbshell: No such file or directory
+db_1      | {"t":{"$date":"2021-07-15T03:40:08.094+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn2","msg":"Connection ended","attr":{"remote":"127.0.0.1:40716","uuid":"8629e953-e2c6-4a92-8258-1c48081ef98c","connectionId":2,"connectionCount":0}}
+db_1      | 
+db_1      | /usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/authscript.sh
+db_1      | Creating application user and db
+db_1      | /docker-entrypoint-initdb.d/authscript.sh: line 5: MONGO_PORT: unbound variable
+server_1  | Green Light GO!
