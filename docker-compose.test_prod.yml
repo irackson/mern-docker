@@ -58,10 +58,10 @@ services:
             # On server could be /data/db
             # For this case we will create a Docker volume and use it instead
             # You need to run docker volume create yourproject-dbdata
-            - rhw-dbdata:/data/db
+            - rhw2-dbdata:/data/db
             - ./docker-scripts/:/docker-entrypoint-initdb.d
         command: [--auth]
 # Add this to include data volume for mongo
 # Confirm this is working later
 volumes:
-    ? rhw-dbdata
+    ? rhw2-dbdata

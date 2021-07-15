@@ -38,7 +38,7 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
 3. in terminal...
 
     1. list containers with `docker ps`, then copy name of container with mongo image (should be `node-react-docker_db_1`)
-    2. enter mongo container with `docker exec -it team-nrd_db_1 bash`
+    2. enter mongo container with `docker exec -it team-nrd2_db_1 bash`
     3. enter mongo shell with `mongo`
     4. switch to db admin with `use admin`
     5. create root user with
@@ -65,9 +65,9 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
 
 creating images
 
-1. go to dockerhub and create repository (mine is ihomenasusdevr/nrd):
-2. `cd client && docker build . -t ihomenasusdevr/nrd:client-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:client-depl && cd ..`
-3. `cd server && docker build . -t ihomenasusdevr/nrd:server-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd:server-depl && cd ..`
+1. go to dockerhub and create repository (mine is ihomenasusdevr/nrd2):
+2. `cd client && docker build . -t ihomenasusdevr/nrd2:client-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd2:client-depl && cd ..`
+3. `cd server && docker build . -t ihomenasusdevr/nrd2:server-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd2:server-depl && cd ..`
 
 Digital Ocean instructions
 
@@ -75,7 +75,7 @@ Digital Ocean instructions
 2. mount to active state: `docker-machine use machine-name`
 3. enter with: `docker-machine ssh machine-name`
 4. install docker-compose with `apt install docker-compose`
-5. docker pull client/server images (`docker pull ihomenasusdevr/nrd:client-depl`, `docker pull ihomenasusdevr/nrd:server-depl`)
+5. docker pull client/server images (`docker pull ihomenasusdevr/nrd2:client-depl`, `docker pull ihomenasusdevr/nrd2:server-depl`)
 6. `touch docker-compose.yml` --> `vim docker-compose.yml` --> copy/paste docker-compose.depl.yml
 7. `touch .env` --> `vim .env` --> copy/paste postprod.env contents to .env
 8. deploy app: `docker-compose up -d --force-recreate --remove-orphans`
