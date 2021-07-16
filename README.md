@@ -1,5 +1,7 @@
 # # DevOps Capstone by Ian Rackson [![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker)
 
+## Description: DevOps GA Module -- using my team's project from unit-3 as the codebase, this capstone aims to demonstrate a CI/CD workflow centered around Docker. The end product is a DigitalOcean droplet that provisions an interactive composition of server, client, and mongo production images via Nginx
+
 ## Instructions
 
 ### Development in/out of Docker
