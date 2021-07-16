@@ -1,4 +1,4 @@
-# DevOps Capstone
+# DevOps Capstone by Ian Rackson
 
 ## MVP
 
