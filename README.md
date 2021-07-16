@@ -1,24 +1,86 @@
-# DevOps Capstone by Ian Rackson
+# # DevOps Capstone by Ian Rackson [![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker)
 
-## MVP
+## Instructions
 
-**- Automated testing**
-You will add automated tests to your application, covering as much functionality as possible. For example, unit tests can be written to confirm the functionality of your model layer, while integration tests can be written to test whether or not a given HTTP request will result in a response that conforms to expectations.
+### Development in/out of Docker
 
-    Based on the previous lessons, Mocha and Chai can be used to test an Express application in addition to libraries such as Supertest for testing APIs. Other monolith applications in non-JavaScript languages tend to have preferred testing libraries associated with them, such as RSpec for Rails or jUnit for Java. If you choose to add testing to a React application, we recommend using the Jest and Enzyme libraries.
+#### to run outside of docker container to contrast with the regular developer experience
 
-    To ensure you can meet all of the project requirements in a timely fashion, you should write a token amount of tests before moving on to the other deliverables. Once you have the full scaffolding set up, you can return to write more tests.
+1. spin up mongo (from ./server): $ ~/mongodb/bin/mongod
+2. touch env in server and add necessary variables
+3. $ cd server && npm run dev
+4. $ cd client && npm run start
 
-**- Deployment with Docker**  
- Use Docker to provide a container for your application. Docker offers detailed documentation for containerizing and deploying applications of all popular tech stacks, in addition to many learning resources and third-party guides and walk-throughs. If you rely on any third-party walk-throughs or guides, try to find the most recent resources that use a tech stack as closely related to your project as possible.
+#### Docker Instructions
 
-    Recall the use of Docker images to set up the basic tech stack requirements for your application. You will likely be able to find an official image to start from for your project. We recommend trying to containerize either a monolith application or the back-end API from a React-based project.
+care -- dev compose will overwrite prod compose and vice versa on your local machine (dockerhub commit history will be safe tho)
 
-**- Continuous integration**
-Your project will use Jenkins to set up a build pipeline. The build stage should install any necessary dependencies, such as Node modules, while the testing stage should run the automated tests you've written for your application.
+##### development
 
-    Finally, your pipeline should have a delivery stage that includes pushing code to a Git repository and/or deploying the application with tools such as Heroku.
+-   dev compose cmd (from ./): $ `docker-compose -f docker-compose.dev.yml --env-file=dev.env up --build --remove-orphans`
+-   or to run last image: $ `docker compose up -d` (`-d` for detached mode)
+-   to stop running: $ `docker compose stop`
 
-LiveLink (frontend): <http://167.99.48.166/>
-LiveLink (backend): <http://167.99.48.166:4000/>
-Git Repo Link (frontend & backend):
+development server will log a port for you to view frontend app, but that's the inner port... go to the one on the left of client 'ports' in the docker-compose file (specified in env), or open the Docker app and click view in browser
+
+to view db in MongoDB Compass, make sure to replace name of mongo docker service (ex. 'db') with 'localhost', and use uri with auth credentials if viewing local production database
+
+##### production with mongo auth
+
+###### create production images
+
+-   to remove existing db volume if desired:
+    -   $ docker volume ls
+    -   $ docker volume remove _existing-db_
+
+1. run `docker-compose -f docker-compose.pre_prod.yml --env-file=preprod.env up --build --remove-orphans`
+2. in new terminal...
+
+    1. list containers with `docker ps`, then copy name of container with mongo image (should be something like `root-dir_db_1`)
+    2. enter mongo container with `docker exec -it root-dir_db_1 bash`
+    3. enter mongo shell with `mongo`
+    4. switch to db admin with `use admin`
+    5. create root user with MONGO_INITDB_ROOT_USERNAME and MONGO_INITDB_ROOT_PASSWORD from postprod.env
+
+        ```language='bash'
+        db.createUser(
+            {
+                user: "username123",
+                pwd: "password123",
+                roles:["root"]
+            }
+        );
+        ```
+
+3. exit mongo shell with `exit`
+4. exit container shell with `exit`
+5. shut down docker containers with `ctrl c`
+6. recreate production environment with `docker-compose -f docker-compose.test_prod.yml --env-file=postprod.env up --build --remove-orphans`
+
+###### upload production images to dockerhub
+
+creating images
+
+1. go to dockerhub and create repository (mine is ihomenasusdevr/nrd2):
+2. `cd client && docker build . -t ihomenasusdevr/nrd2:client-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd2:client-depl && cd ..`
+3. `cd server && docker build . -t ihomenasusdevr/nrd2:server-depl -f ./Dockerfile.prod && docker push ihomenasusdevr/nrd2:server-depl && cd ..`
+
+Digital Ocean instructions
+
+1. `docker-machine create --driver digitalocean --digitalocean-image "ubuntu-18-04-x64" --digitalocean-access-token yourtoken yourdropletname`
+    - if the following error shows up, you can just skip to step 2, but if it annoys you...: Error creating machine: Error running provisioning: Unable to verify the Docker daemon is listening: Maximum number of retries (10) exceeded, don't worry, just `docker-machine regenerate-certs yourdropletname`. this will probably get stuck when copying certs to the remote machine. after a few minutes, ctrl c out, then proceed
+    - mount to active state: `docker-machine use yourdropletname`
+2. enter with: `docker-machine ssh yourdropletname`
+3. install docker-compose with `apt install docker-compose`
+4. docker pull client/server images (`docker pull ihomenasusdevr/nrd2:client-depl`, `docker pull ihomenasusdevr/nrd2:server-depl`)
+5. `touch docker-compose.yml` --> `vim docker-compose.yml` --> copy/paste docker-compose.depl.yml
+6. `touch .env` --> `vim .env` --> copy/paste postprod.env contents to .env
+7. deploy app: `docker-compose up -d --force-recreate --remove-orphans`
+8. exit ssh shell: `exit`
+
+#### Useful commands
+
+-   stop nginx: `sudo systemctl stop nginx`
+-   check network stuff: `sudo netstat -nlp`
+-   to run app from Docker Desktop, paste any of the non-hosting docker-compose file contents into docker-compose.yml
+-   start docker (if error: "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"): on macos open the docker app
