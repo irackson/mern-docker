@@ -10,7 +10,7 @@ import ScenicShow from "../pages/ScenicShow";
 
 const API_URL = window.document.URL.includes("localhost")
     ? `http://localhost:4000`
-    : "http://165.227.176.67:4000";
+    : "http://167.99.48.166:4000";
 
 // const API_PORT = process.env.REACT_APP_DEV_API_PORT
 //     ? process.env.REACT_APP_DEV_API_PORT

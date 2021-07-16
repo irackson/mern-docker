@@ -12,14 +12,12 @@ services:
             dockerfile: Dockerfile.prod
         environment:
             - PORT=${PORT}
-            # - MONGODB_URL=${MONGODB_PROD_URL}
             - MONGODB_URL=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGODB_PROD_URI}
             - SECRET=${SECRET}
             - NODE_ENV=production
         ports:
             - ${PORT}:${PORT}
         command: node server.js
-        # should be links instead of depends_on?
         depends_on:
             - db
         restart: always
@@ -31,11 +29,6 @@ services:
         build:
             context: ./client
             dockerfile: Dockerfile.prod
-        environment:
-            - REACT_APP_MAPS_API=${REACT_APP_MAPS_API}
-            - REACT_APP_DEV_API_PORT=${REACT_APP_DEV_API_PORT}
-            - REACT_APP_PROD_API_DOMAIN=${REACT_APP_PROD_API_DOMAIN}
-            - NODE_ENV=production
         ports:
             - 80:80
         links:
@@ -59,7 +52,7 @@ services:
             # For this case we will create a Docker volume and use it instead
             # You need to run docker volume create yourproject-dbdata
             - rhw2-dbdata:/data/db
-            - ./docker-scripts/:/docker-entrypoint-initdb.d
+            # - ./docker-scripts/:/docker-entrypoint-initdb.d
         command: [--auth]
 # Add this to include data volume for mongo
 # Confirm this is working later

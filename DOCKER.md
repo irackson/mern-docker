@@ -16,8 +16,7 @@ care -- dev compose will overwrite prod compose and vice versa
 
 ##### development
 
--   place contents of preprod.env file into .env
--   dev compose cmd (from ./): $ `docker-compose -f docker-compose.dev.yml up --build --remove-orphans`
+-   dev compose cmd (from ./): $ `docker-compose -f docker-compose.dev.yml --env-file=dev.env up --build --remove-orphans`
 -   or to run last image: $ `docker compose up -d` (`-d` for detached mode)
 -   to stop running: $ `docker compose stop`
 
@@ -33,15 +32,14 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
     -   $ docker volume ls
     -   $ docker volume remove _existing-db_
 
-1. place contents of preprod.env file into .env
-2. run `docker-compose -f docker-compose.pre_prod.yml up --build --remove-orphans`
-3. in terminal...
+1. run `docker-compose -f docker-compose.pre_prod.yml --env-file=preprod.env up --build --remove-orphans`
+2. in new terminal...
 
-    1. list containers with `docker ps`, then copy name of container with mongo image (should be `node-react-docker_db_1`)
-    2. enter mongo container with `docker exec -it team-nrd2_db_1 bash`
+    1. list containers with `docker ps`, then copy name of container with mongo image (should be `team-nrd_db_1`)
+    2. enter mongo container with `docker exec -it team-nrd_db_1 bash`
     3. enter mongo shell with `mongo`
     4. switch to db admin with `use admin`
-    5. create root user with
+    5. create root user with MONGO_INITDB_ROOT_USERNAME and MONGO_INITDB_ROOT_PASSWORD from postprod.env
 
         ```language='bash'
         db.createUser(
@@ -53,13 +51,10 @@ to view db in MongoDB Compass, make sure to replace name of mongo docker service
         );
         ```
 
-4. exit mongo shell with `exit`
-5. exit container shell with `exit`
-6. shut down docker containers with `ctrl c`
-
-7. place contents of postprod.env file into .env
- <!-- 8. create production images with `docker-compose -f docker-compose.test_prod.yml up --build --remove-orphans` -->
-8. create production images with `docker-compose -f docker-compose.test_prod.yml up --build --remove-orphans`
+3. exit mongo shell with `exit`
+4. exit container shell with `exit`
+5. shut down docker containers with `ctrl c`
+6. recreate production environment with `docker-compose -f docker-compose.test_prod.yml --env-file=postprod.env up --build --remove-orphans`
 
 ###### upload production images to dockerhub
 
@@ -72,18 +67,19 @@ creating images
 Digital Ocean instructions
 
 1. `docker-machine create --driver digitalocean --digitalocean-image "ubuntu-18-04-x64" --digitalocean-access-token yourtoken yourdropletname`
- <!-- - if the following error shows up: Error creating machine: Error running provisioning: Unable to verify the Docker daemon is listening: Maximum number of retries (10) exceeded, try  -->
-2. mount to active state: `docker-machine use machine-name`
-3. enter with: `docker-machine ssh machine-name`
-4. install docker-compose with `apt install docker-compose`
-5. docker pull client/server images (`docker pull ihomenasusdevr/nrd2:client-depl`, `docker pull ihomenasusdevr/nrd2:server-depl`)
-6. `touch docker-compose.yml` --> `vim docker-compose.yml` --> copy/paste docker-compose.depl.yml
-7. `touch .env` --> `vim .env` --> copy/paste postprod.env contents to .env
-8. deploy app: `docker-compose up -d --force-recreate --remove-orphans`
-9. exit ssh shell: `exit`
+    - if the following error shows up, you can just skip to step 2, but if it annoys you...: Error creating machine: Error running provisioning: Unable to verify the Docker daemon is listening: Maximum number of retries (10) exceeded, don't worry, just `docker-machine regenerate-certs yourdropletname`. this will probably get stuck when copying certs to the remote machine. after a few minutes, ctrl c out, then proceed
+    - mount to active state: `docker-machine use yourdropletname`
+2. enter with: `docker-machine ssh yourdropletname`
+3. install docker-compose with `apt install docker-compose`
+4. docker pull client/server images (`docker pull ihomenasusdevr/nrd2:client-depl`, `docker pull ihomenasusdevr/nrd2:server-depl`)
+5. `touch docker-compose.yml` --> `vim docker-compose.yml` --> copy/paste docker-compose.depl.yml
+6. `touch .env` --> `vim .env` --> copy/paste postprod.env contents to .env
+7. deploy app: `docker-compose up -d --force-recreate --remove-orphans`
+8. exit ssh shell: `exit`
 
 #### Useful commands
 
 -   stop nginx: `sudo systemctl stop nginx`
 -   check network stuff: `sudo netstat -nlp`
 -   to run app from Docker Desktop, paste any of the non-hosting docker-compose file contents into docker-compose.yml
+-   start docker (if error: "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"): on macos open the docker app

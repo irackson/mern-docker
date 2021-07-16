@@ -23,6 +23,5 @@ RUN npm install
 
 # Copies the files from the client directory to the container
 COPY . /app/client/
-# EXPOSE 5000
 # Runs the client
 CMD ["npm", "run", "start"]
