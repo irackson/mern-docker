@@ -4,7 +4,7 @@
 
 ### Checkout my walk-through!
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 ###### Time spent learning to dockerize and host this already-coded MERN app:
 
