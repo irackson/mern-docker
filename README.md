@@ -6,11 +6,11 @@
 
 <div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc?start=581" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-###### Time spent learning to dockerize and host this already-coded MERN app:
+###### Time spent learning to dockerize and host the _Run Hike Walk_ MERN app, which was originally coded without using docker by myself and a team of bootcamp peers!
 
 [![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker)
 
-###### Git Repo: <https://github.com/irackson/mern-docker>
+<!-- ###### Git Repo: <https://github.com/irackson/mern-docker> -->
 
 ###### Digital Ocean Droplet IP: <http://167.99.48.166/>
 
@@ -109,7 +109,7 @@
 
 ###### Frontend Readme (by Will Pratt)
 
-> The frontend of this project was started on 21MAY21 and was editted multiple times. Then main focus of frontend was rendering a clean, colorful, and beautiful UI, full CRUD routes for the three pages (run, hike, scenic) of the On The Run app. The original creator of the repo was Katherine and the author of the first pull request was Garrett. After a couple days the team added Ian Rackson. All together they proceeded to put together an amazing app that was visually beautiful and functional. Will contributed authorization code as well. The success of the frontend was really driven by Garrett, Katherine, and Ian.
+> The frontend of this project was started on 21MAY21 and was edited multiple times. Then main focus of frontend was rendering a clean, colorful, and beautiful UI, full CRUD routes for the three pages (run, hike, scenic) of the On The Run app. The original creator of the repo was Katherine and the author of the first pull request was Garrett. After a couple days the team added Ian Rackson. All together they proceeded to put together an amazing app that was visually beautiful and functional. Will contributed authorization code as well. The success of the frontend was really driven by Garrett, Katherine, and Ian.
 
 > The key features were the visual design, dark mode, and google maps. The reason these were key were because Users really enjoy compelling visual design, the ability to customize their experience of the app, and also like knowing or showing off where they have been or where they would like to go. These features really enhanced the UX and brought the app in line with other social media apps on the market.
 
@@ -119,7 +119,7 @@
 
 > Ultimately, the On The Run app provides a simple way to post a user's run, hike, or scenic walk for all to see with a clean and colorful UI.
 
-> In conclussion, this was a team effort. Everyone contributed key code and provided exceptional effort to make this app visually beautiful, functional, and the project successful.
+> In conclusion, this was a team effort. Everyone contributed key code and provided exceptional effort to make this app visually beautiful, functional, and the project successful.
 
 ###### Backend Live at (no-docker):
 
@@ -127,7 +127,7 @@
 
 ###### Backend Readme (by Will Pratt)
 
-> The backend of this project was started on 20MAY21 and was editted multiple times. Then main focus of backend was facilitating the creation of CRUD routes for the three pages (run, hike, scenic) of the On The Run site. The original author was Will Pratt. The QA/QC was Ian Rackson and Katherine Gomez. Both of whom editied this file up to the last minute and make this project an ultimate success.
+> The backend of this project was started on May 20, 2021 and was edited multiple times. Then main focus of backend was facilitating the creation of CRUD routes for the three pages (run, hike, scenic) of the On The Run site. The original author was Will Pratt. The QA/QC was Ian Rackson and Katherine Gomez. Both of whom edited this file up to the last minute and make this project an ultimate success.
 
 > Besides the CRUD routes, the additional feature of authentication was added. This was to ensure users could: 1. not have anyone else edit/deface their activity posts. 2. only that authorized user could post under that username. This was a good exercise in authorizations in React for the team to problem shoot basic issues like tokens and how to logout.
 
