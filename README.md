@@ -4,11 +4,11 @@
 
 ### Checkout this Q&A on Docker with my General Assembly Instructor Ira Herman!
 
-<div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc?start=581" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+<div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc?start=581&modestbranding=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-###### Time spent learning to dockerize and host the _Run Hike Walk_ MERN app, which was originally coded without using docker by myself and a team of bootcamp peers!
+<!-- ###### Time spent learning to dockerize and host the _Run Hike Walk_ MERN app, which was originally coded without using docker by myself and a team of bootcamp peers!
 
-[![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker)
+[![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker) -->
 
 <!-- ###### Git Repo: <https://github.com/irackson/mern-docker> -->
 
