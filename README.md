@@ -12,6 +12,10 @@ _Markdown_:
 
 ### The end product is a DigitalOcean droplet that provisions an interactive composition of server, client, and mongo production images via Nginx.
 
+###### Digital Ocean Droplet IP: <http://167.99.48.166/>
+
+###### DockerHub Repo: <https://hub.docker.com/repository/docker/ihomenasusdevr/nrd2>
+
 #### Checkout this Q&A on Docker with my General Assembly Instructor Ira Herman!
 
 <div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc?start=581&modestbranding=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
@@ -21,8 +25,6 @@ _Markdown_:
 [![wakatime](https://wakatime.com/badge/github/irackson/dockerized-mern.svg)](https://wakatime.com/badge/github/irackson/dockerized-mern)+[![wakatime](https://wakatime.com/badge/github/irackson/mern-docker.svg)](https://wakatime.com/badge/github/irackson/mern-docker) -->
 
 <!-- ###### Git Repo: <https://github.com/irackson/mern-docker> -->
-
-###### Digital Ocean Droplet IP: <http://167.99.48.166/>
 
 ---
 
