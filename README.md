@@ -1,8 +1,18 @@
-# DevOps Capstone by Ian Rackson
+_Title_:
 
-## Description: DevOps GA Module -- using my team's project from unit-3 as the codebase, this capstone aims to demonstrate a CI/CD workflow centered around Docker. The end product is a DigitalOcean droplet that provisions an interactive composition of server, client, and mongo production images via Nginx
+# MERN with Docker
 
-### Checkout this Q&A on Docker with my General Assembly Instructor Ira Herman!
+_Description_:
+
+###### This Bootcamp capstone demonstrates a CI/CD workflow centered around Docker Containers and the MERN Stack
+
+_Markdown_:
+
+### Using a Full CRUD MERN stack app with JWT token authorization built in, which I created with a team of other remote developers while at General Assembly's Coding Bootcamp, this capstone transforms that original codebase into a Dockerized production level application with a CI/CD workflow.
+
+### The end product is a DigitalOcean droplet that provisions an interactive composition of server, client, and mongo production images via Nginx.
+
+#### Checkout this Q&A on Docker with my General Assembly Instructor Ira Herman!
 
 <div class="iframe-container"><iframe src="https://www.youtube-nocookie.com/embed/W5Xq3RdX5kc?start=581&modestbranding=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
