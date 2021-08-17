@@ -31,8 +31,8 @@ export default function Login({
     toggleWantsSignup,
     setUserName: setUser,
 }) {
-    const [username, setUserName] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUserName] = useState("JustVisiting");
+    const [password, setPassword] = useState("justvisiting123");
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = await loginUser({
@@ -79,6 +79,7 @@ export default function Login({
                     <input
                         type="text"
                         onChange={(e) => setUserName(e.target.value)}
+                        defaultValue="JustVisiting"
                     />
                 </div>
                 <div className="row">
@@ -88,6 +89,7 @@ export default function Login({
                     <input
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
+                        defaultValue="justvisiting123"
                     />
                 </div>
                 <div className="row">
