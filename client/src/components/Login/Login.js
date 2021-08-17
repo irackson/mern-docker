@@ -79,7 +79,12 @@ export default function Login({
                     <input
                         type="text"
                         onChange={(e) => setUserName(e.target.value)}
-                        defaultValue="JustVisiting"
+                        defaultValue={
+                            password &&
+                            window.location.href.split("/").pop() !== "signup"
+                                ? "JustVisiting"
+                                : undefined
+                        }
                     />
                 </div>
                 <div className="row">
@@ -89,7 +94,12 @@ export default function Login({
                     <input
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
-                        defaultValue="justvisiting123"
+                        defaultValue={
+                            password &&
+                            window.location.href.split("/").pop() !== "signup"
+                                ? "justvisiting123"
+                                : undefined
+                        }
                     />
                 </div>
                 <div className="row">
