@@ -14,6 +14,8 @@ _Markdown_:
 
 ###### Digital Ocean Droplet IP: <http://167.99.48.166/>
 
+###### Nicer Link: <http://dockerized-mern.ianrackson.com/>
+
 ###### DockerHub Repo: <https://hub.docker.com/repository/docker/ihomenasusdevr/nrd2>
 
 #### Checkout this Q&A on Docker with my General Assembly Instructor Ira Herman!
